@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Resume Ranker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f1419;
+            --bg-card: #1a2332;
+            --bg-input: #242f3d;
+            --accent: #22d3ee;
+            --accent-dim: #0891b2;
+            --accent-glow: rgba(34, 211, 238, 0.28);
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --danger: #f87171;
+            --danger-bg: rgba(248, 113, 113, 0.13);
+            --border: #334155;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            color: var(--text);
+            background: var(--bg-dark);
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 65% 50% at 20% 0%, rgba(34, 211, 238, 0.18), transparent),
+                radial-gradient(ellipse 50% 40% at 100% 100%, rgba(8, 145, 178, 0.14), transparent);
+            pointer-events: none;
+        }
+
+        .wrap {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            width: min(430px, 100%);
+            background: linear-gradient(170deg, rgba(26, 35, 50, 0.95), rgba(17, 24, 39, 0.95));
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px 24px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .title {
+            margin: 0;
+            font-size: 1.45rem;
+            text-align: center;
+        }
+        .subtitle {
+            margin: 8px 0 18px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        .error {
+            background: var(--danger-bg);
+            border: 1px solid var(--danger);
+            color: #fecaca;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 6px;
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-input);
+            color: var(--text);
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        button {
+            margin-top: 16px;
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+            color: #06131a;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform .16s ease, box-shadow .16s ease;
+        }
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
+
+        .alt {
+            margin-top: 13px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.89rem;
+        }
+        .alt.small {
+            margin-top: 8px;
+            font-size: 0.84rem;
+        }
+        .alt a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="wrap">
+        <div class="card">
+            <h2 class="title">Welcome Back</h2>
+            <p class="subtitle">Sign in to continue resume ranking</p>
+
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST">
+                <label for="username">Email</label>
+                <input id="username" name="username" type="email" autocomplete="email" required>
+
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
+
+                <button type="submit">Sign In</button>
+            </form>
+
+            <p class="alt small"><a href="/forgot-password">Forgot password?</a></p>
+            <p class="alt">No account? <a href="/register">Create one</a></p>
+        </div>
+    </div>
+</body>
+</html>
